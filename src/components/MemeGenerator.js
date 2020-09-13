@@ -24,7 +24,11 @@ const MemeGenerator = (props) => {
         {activeMemes.map(entry => {
           console.log(memeDataSet[entry]);
           return (
-            <Meme key={entry} meme={memeDataSet[entry]} />
+            <Meme
+              key={entry}
+              meme={memeDataSet[entry]}
+              topText={topText}
+              bottomText={bottomText} />
           );
         })}
       </div>

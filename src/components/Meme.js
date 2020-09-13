@@ -3,9 +3,9 @@ import React from "react";
 const Meme = (props) => {
   return (
     <div>
-      <h2> {props.meme.topText} </h2>
-      <h2> {props.meme.bottomText} </h2>
-      <img src={props.meme.imageUrl} alt="" />
+      <h2> {props.topText} </h2>
+      <h2> {props.bottomText} </h2>
+      <img src={props.meme.url} alt="" />
     </div>
   );
 };
