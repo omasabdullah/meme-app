@@ -1,8 +1,13 @@
 import React from 'react';
+import Header from './Header';
+import MemeGenerator from './MemeGenerator';
 
-function App() {
+const App = (props) => {
   return (
-    <div>Sup bruh</div>
+    <div>
+      <Header />
+      <MemeGenerator />
+    </div>
   );
 }
 
