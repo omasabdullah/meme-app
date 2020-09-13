@@ -1,40 +1,52 @@
 import React, { useEffect, useState } from "react";
+import Meme from "./Meme";
 
 const MemeGenerator = (props) => {
-  const [topText, setTopText] = useState("");
-  const [bottomText, setBottomText] = useState("");
-  const [imageUrl, setImageUrl] = useState("https://i.imgflip.com/30b1gx.jpg");
-  const [imageUrlSet, setImageUrlSet] = useState([]);
+  const [textFieldTop, setTextFieldTop] = useState("");
+  const [textFieldBottom, setTextFieldBottom] = useState("");
+  const [dataActiveMemes, setDataActiveMemes] = useState([]);
+  const [dataMemes, setDataMemes] = useState([]);
 
   useEffect(() => {
     fetch("https://api.imgflip.com/get_memes")
-      .then(response => response.json())
-      .then(response => setImageUrlSet(response.data.memes));
+      .then((response) => response.json())
+      .then((response) => setDataMemes(response.data.memes));
   }, []);
 
   const handleGenerateMeme = (event) => {
-    const entry = Math.floor(Math.random() * imageUrlSet.length);
-    setImageUrl(imageUrlSet[entry].url);
-  }
+    const entries = [1, 2, 3].map((x) =>
+      Math.floor(Math.random() * dataMemes.length)
+    );
+    setDataActiveMemes(entries);
+  };
 
   return (
     <div>
       <form>
         <input
-          type='text'
-          placeholder='Top Text'
-          onChange={(event) => setTopText(event.target.value)}
-          value={topText} />
+          type="text"
+          placeholder="Top Text"
+          onChange={(event) => setTextFieldTop(event.target.value)}
+          value={textFieldTop}
+        />
         <input
-          type='text'
-          placeholder='Bottom Text'
-          onChange={(event) => setBottomText(event.target.value)}
-          value={bottomText} />
-        <button type='button' onClick={handleGenerateMeme}>Generate Meme</button>
+          type="text"
+          placeholder="Bottom Text"
+          onChange={(event) => setTextFieldBottom(event.target.value)}
+          value={textFieldBottom}
+        />
+        <button type="button" onClick={handleGenerateMeme}>
+          Generate Meme
+        </button>
       </form>
-      <h2> {topText} </h2>
-      <h2> {bottomText} </h2>
-      <img src={imageUrl} alt=''/>
+      {dataActiveMemes.map((entry) => (
+        <Meme
+          key={entry}
+          meme={dataMemes[entry]}
+          topText={textFieldTop}
+          bottomText={textFieldBottom}
+        />
+      ))}
     </div>
   );
 };
