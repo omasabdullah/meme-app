@@ -4,7 +4,7 @@ import Meme from './Meme'
 const MemeGenerator = (props) => {
   const [topText, setTopText] = useState("");
   const [bottomText, setBottomText] = useState("");
-  const [memes, setMemes] = useState([0]);
+  const [memes, setMemes] = useState([]);
   const [imageUrlSet, setImageUrlSet] = useState([]);
 
   useEffect(() => {
