@@ -5,7 +5,7 @@ const Meme = (props) => {
     <div>
       <h2> {props.topText} </h2>
       <h2> {props.bottomText} </h2>
-      <img src={props.meme.url} alt="" />
+      <img src={props.meme.url} alt="" height="240px"/>
     </div>
   );
 };
