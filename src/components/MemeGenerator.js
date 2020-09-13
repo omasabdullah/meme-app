@@ -4,27 +4,27 @@ import Meme from './Meme'
 const MemeGenerator = (props) => {
   const [topText, setTopText] = useState("");
   const [bottomText, setBottomText] = useState("");
-  const [memes, setMemes] = useState([]);
-  const [imageUrlSet, setImageUrlSet] = useState([]);
+  const [activeMemes, setActiveMemes] = useState([]);
+  const [memeDataSet, setMemeDataSet] = useState([]);
 
   useEffect(() => {
     fetch("https://api.imgflip.com/get_memes")
       .then(response => response.json())
-      .then(response => setImageUrlSet(response.data.memes));
+      .then(response => setMemeDataSet(response.data.memes));
   }, []);
 
   const handleGenerateMeme = (event) => {
-    const entries = [1, 2, 3].map(x => Math.floor(Math.random()*imageUrlSet.length));
-    setMemes(entries);
+    const entries = [1, 2, 3].map(x => Math.floor(Math.random()*memeDataSet.length));
+    setActiveMemes(entries);
   }
 
   const MemeList = () => {
     return (
       <div>
-        {memes.map(entry => {
-          console.log(imageUrlSet[entry]);
+        {activeMemes.map(entry => {
+          console.log(memeDataSet[entry]);
           return (
-            <Meme key={entry} meme={imageUrlSet[entry]} />
+            <Meme key={entry} meme={memeDataSet[entry]} />
           );
         })}
       </div>
