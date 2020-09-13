@@ -1,9 +1,10 @@
 import React, { useEffect, useState } from "react";
+import Meme from './Meme'
 
 const MemeGenerator = (props) => {
   const [topText, setTopText] = useState("");
   const [bottomText, setBottomText] = useState("");
-  const [imageUrl, setImageUrl] = useState("https://i.imgflip.com/30b1gx.jpg");
+  const [memes, setMemes] = useState([0]);
   const [imageUrlSet, setImageUrlSet] = useState([]);
 
   useEffect(() => {
@@ -13,8 +14,21 @@ const MemeGenerator = (props) => {
   }, []);
 
   const handleGenerateMeme = (event) => {
-    const entry = Math.floor(Math.random() * imageUrlSet.length);
-    setImageUrl(imageUrlSet[entry].url);
+    const entries = [1, 2, 3].map(x => Math.floor(Math.random()*imageUrlSet.length));
+    setMemes(entries);
+  }
+
+  const MemeList = () => {
+    return (
+      <div>
+        {memes.map(entry => {
+          console.log(imageUrlSet[entry]);
+          return (
+            <Meme key={entry} meme={imageUrlSet[entry]} />
+          );
+        })}
+      </div>
+    );
   }
 
   return (
@@ -32,9 +46,7 @@ const MemeGenerator = (props) => {
           value={bottomText} />
         <button type='button' onClick={handleGenerateMeme}>Generate Meme</button>
       </form>
-      <h2> {topText} </h2>
-      <h2> {bottomText} </h2>
-      <img src={imageUrl} alt=''/>
+      {MemeList()}
     </div>
   );
 };
