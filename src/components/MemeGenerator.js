@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import Meme from "./Meme";
 
-const MemeGenerator = (props) => {
+const MemeGenerator = () => {
   const [textFieldTop, setTextFieldTop] = useState("");
   const [textFieldBottom, setTextFieldBottom] = useState("");
   const [dataActiveMemes, setDataActiveMemes] = useState([]);
@@ -13,12 +13,12 @@ const MemeGenerator = (props) => {
       .then((response) => setDataMemes(response.data.memes));
   }, []);
 
-  const handleGenerateMeme = (event) => {
-    const entries = [1, 2, 3].map((x) =>
+  const handleGenerateMeme = useCallback(() => {
+    const entries = [1, 2, 3].map(() =>
       Math.floor(Math.random() * dataMemes.length)
     );
     setDataActiveMemes(entries);
-  };
+  }, []);
 
   return (
     <div>
