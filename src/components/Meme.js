@@ -1,16 +1,12 @@
 import React from "react";
 import styles from "./mystyle.module.css";
 
-const Meme = (props) => {
+const Meme = ({ meme, topText, bottomText }) => {
   return (
     <div className={styles.container}>
-      <img
-        src={props.meme.url}
-        alt=""
-        height="240px"
-      />
-      <h2 className={styles.topText}> {props.topText} </h2>
-      <h2 className={styles.bottomText}> {props.bottomText} </h2>
+      <img src={meme.url} alt="" height="240px" />
+      <h2 className={styles.topText}> {topText} </h2>
+      <h2 className={styles.bottomText}> {bottomText} </h2>
     </div>
   );
 };
